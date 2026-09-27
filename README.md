@@ -97,7 +97,7 @@ Bridges-NBI-Analysis/
 │       ├── top10statesbytrucktraffic.png
 │       └── Distributionofbridgesbytop10owneragencies.png
 ├── docs/
-│   ├── AIT614_Final_Paper.pdf         # Detailed research paper
+│   ├── technical_report.pdf         # Detailed research paper
 │   └── MongoDB_Integration.md         # NoSQL setup guide
 └── sql/
     └── databricks_queries.sql         # Visualization SQL queries
@@ -249,7 +249,7 @@ XGBoost Results:
 ## Research Paper
 
 For detailed methodology, statistical analysis, and comprehensive results, see:
-📄 **[AIT614_Final_Paper.pdf](docs/AIT614_Final_Paper.pdf)**
+📄 **[technical_report.pdf](docs/technical_report.pdf)**
 
 ## Author
 
