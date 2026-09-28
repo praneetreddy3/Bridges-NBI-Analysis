@@ -134,7 +134,7 @@ git clone https://github.com/praneetreddy3/Bridges-NBI-Analysis.git
 cd Bridges-NBI-Analysis
 
 # Install dependencies
-pip install -r src/requirements.txt
+pip install -r requirements.txt
 ```
 
 #### 3. Prepare Data
