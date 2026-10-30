@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Raw FHWA National Bridge Inventory extracts, loaded as text by pipeline/load_raw.py
+    tables:
+      - name: nbi_bridges
+        description: One row per bridge per inspection year, exactly as delivered (all columns VARCHAR)

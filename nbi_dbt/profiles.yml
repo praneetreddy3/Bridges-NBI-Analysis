@@ -1,0 +1,8 @@
+nbi_bridges:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      # Same file the Python loader writes to; override with NBI_DUCKDB_PATH.
+      path: "{{ env_var('NBI_DUCKDB_PATH', '../warehouse/nbi.duckdb') }}"
+      threads: 2

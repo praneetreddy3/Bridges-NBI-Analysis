@@ -1,0 +1,23 @@
+{
+  "split": "train=2024, test=2025",
+  "train_rows": 618688,
+  "test_rows": 624177,
+  "test_base_rate": 0.0907,
+  "roc_auc": 0.955,
+  "pr_auc": 0.6765,
+  "recall@0.5": 0.9162,
+  "precision@0.5": 0.4111,
+  "scale_pos_weight": 10.0,
+  "feature_importance": {
+    "design_load_code": 0.3397,
+    "owner_level": 0.1546,
+    "material_family": 0.1476,
+    "main_span_design": 0.0972,
+    "state_abbr": 0.0928,
+    "bridge_age": 0.0711,
+    "avg_daily_traffic": 0.0512,
+    "max_span_ft": 0.0234,
+    "truck_pct": 0.0143,
+    "is_movable": 0.0082
+  }
+}

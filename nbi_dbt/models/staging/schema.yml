@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: stg_bridges
+    description: Typed, renamed and decoded NBI records. Every raw row, with reject_reason set on rows unfit for the marts.
+    columns:
+      - name: inspection_year
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [2024, 2025]
+                quote: false
+      - name: state_code
+        data_tests: [not_null]
+      - name: structure_number
+        data_tests: [not_null]
+      - name: posting_code
+        description: NBI Item 70 (null only on rows flagged missing_posting_code)
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1, 2, 3, 4, 5]
+                quote: false
+      - name: design_load_code
+        description: NBI Item 31 design load descriptor
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['0','1','2','3','4','5','6','7','8','9','A','B','C']
+      - name: reject_reason
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['missing_posting_code', 'duplicate_bridge_key', 'missing_year_built']

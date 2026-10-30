@@ -66,3 +66,12 @@ tmp/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Pipeline outputs / local data
+warehouse/
+data/raw/
+nbi_dbt/target/
+nbi_dbt/logs/
+nbi_dbt/dbt_packages/
+nbi_dbt/.user.yml
+_to_delete/

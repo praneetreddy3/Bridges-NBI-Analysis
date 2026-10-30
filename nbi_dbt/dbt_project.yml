@@ -1,0 +1,28 @@
+name: nbi_bridges
+version: "1.0.0"
+profile: nbi_bridges
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  nbi_bridges:
+    staging:
+      +schema: staging
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table
+
+seeds:
+  nbi_bridges:
+    +schema: reference
+    state_codes:
+      +column_types: {state_code: integer, state_abbr: varchar, state_name: varchar}
+    posting_codes:
+      +column_types: {posting_code: integer, posting_description: varchar}
+    design_load_codes:
+      +column_types: {design_load_code: varchar, design_load_description: varchar}

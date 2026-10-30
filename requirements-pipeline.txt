@@ -1,0 +1,8 @@
+# Pipeline: load -> validate -> dbt -> train. Airflow is installed separately (see README).
+duckdb>=1.1
+dbt-core>=1.10
+dbt-duckdb>=1.9
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+xgboost>=2.0

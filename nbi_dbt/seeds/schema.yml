@@ -1,0 +1,18 @@
+version: 2
+
+seeds:
+  - name: state_codes
+    description: FIPS state / territory codes used by NBI Item 1
+    columns:
+      - name: state_code
+        data_tests: [unique, not_null]
+  - name: posting_codes
+    description: NBI Item 70 bridge posting codes
+    columns:
+      - name: posting_code
+        data_tests: [unique, not_null]
+  - name: design_load_codes
+    description: NBI Item 31 design load descriptors
+    columns:
+      - name: design_load_code
+        data_tests: [unique, not_null]

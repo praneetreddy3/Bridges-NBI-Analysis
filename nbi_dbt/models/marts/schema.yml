@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: fct_bridge_inspection
+    description: "Grain: one bridge (state_code + structure_number) per inspection year."
+    columns:
+      - name: bridge_inspection_key
+        description: Hash of inspection_year, state_code and structure_number
+        data_tests: [unique, not_null]
+      - name: state_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_state')
+                field: state_key
+      - name: material_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_material')
+                field: material_key
+      - name: owner_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_owner')
+                field: owner_key
+      - name: posting_code
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1, 2, 3, 4, 5]
+                quote: false
+      - name: is_posted
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+                quote: false
+
+  - name: dim_state
+    columns:
+      - name: state_key
+        data_tests: [unique, not_null]
+      - name: state_abbr
+        data_tests: [unique, not_null]
+
+  - name: dim_material
+    columns:
+      - name: material_key
+        data_tests: [unique, not_null]
+      - name: material_family
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Prestressed concrete', 'Concrete', 'Steel', 'Timber', 'Other']
+
+  - name: dim_owner
+    columns:
+      - name: owner_key
+        data_tests: [unique, not_null]
+      - name: owner_level
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['State', 'Local', 'Federal', 'Private', 'Tribal', 'Other']
+
+  - name: rejected_bridge_records
+    description: Count of raw rows quarantined from the fact table, by reason and year.
