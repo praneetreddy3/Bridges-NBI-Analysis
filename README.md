@@ -4,7 +4,7 @@
 
 The project has two parts:
 
-1. **Data pipeline (Oct 2026):** raw FHWA files → DuckDB → a dbt star schema with 47 data tests → an XGBoost model, orchestrated as an Airflow DAG.
+1. **Data pipeline (Oct 2026):** raw FHWA files → DuckDB → a dbt star schema with 47 data tests → an XGBoost model, orchestrated by an Airflow DAG.
 2. **Spark analysis (AIT 614 course project):** PySpark feature engineering and model comparison on 950K+ records, with MongoDB and Databricks SQL.
 
 ---
@@ -75,7 +75,7 @@ Code lookups (posting codes, design-load codes, state FIPS codes) are dbt **seed
 | Train / test rows | 618,688 / 624,177 |
 | Test base rate (posted) | 9.07% |
 | ROC-AUC | **0.955** |
-| PR-AUC | **0.677** |
+| PR-AUC | **0.673** |
 | Recall @ 0.5 | 0.916 |
 | Precision @ 0.5 | 0.411 |
 
@@ -85,7 +85,11 @@ Class imbalance is handled with `scale_pos_weight` (≈10). Top features: design
 
 ### Orchestration (Airflow)
 
-`dags/nbi_pipeline_dag.py` runs `load_raw → validate_raw → dbt_build → train_model`:
+> Status: run end to end under Airflow 2.10.5 (Ubuntu on WSL, `airflow dags test nbi_bridge_pipeline`). All 4 tasks succeeded in about 45 seconds.
+>
+> ![Airflow DAG run](docs/airflow_dag_run.png)
+
+`dags/nbi_pipeline_dag.py` defines `load_raw → validate_raw → dbt_build → train_model`:
 
 - every task is a shell command, so each step can also be run by hand
 - `retries=2` with a 1-minute delay for transient failures; `validate_raw` has no retries, because bad data doesn't fix itself
